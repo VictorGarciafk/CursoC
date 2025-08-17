@@ -4,12 +4,14 @@
 void enterosYDecimales();
 void cargarDiagonal();
 void artVenta();
+void cargaYBusqueda();
 
 int main(){
     
     //enterosYDecimales();
     //cargarDiagonal();
-    artVenta();
+    //artVenta();
+    cargaYBusqueda();
     
     return 0;
 }
@@ -93,4 +95,45 @@ void artVenta(){
     }
     
     
+}
+
+//tercer ejercicio
+//cargar el nombre de 5 personas y despues ingresar un nombre para que lo busque dentro de la matriz
+void cargaYBusqueda(){
+    char nombres[5][31];
+    char compNombre[31];
+    int pos = -1;
+
+    int i;
+
+    for (i = 0; i < 5; i++)
+    {
+        printf("ingrese un nombre: ");
+        scanf(" %[^\n]", nombres[i]);
+    }
+
+    for (i = 0; i < 5; i++)
+    {
+        printf("%s\n", nombres[i]);
+    }
+
+    printf("ingrese el nombre que quiere buscar en la lista(Favor de respetar las mayusculas): ");
+    scanf(" %[^\n]", compNombre);
+
+    for (i = 0; i < 5; i++)
+    {
+        if (strcmp(nombres[i],compNombre) == 0)
+        {
+            pos = i;
+        }
+    }
+
+    if (pos != -1)
+    {
+        printf("el nombre se encuentra en la posicion %i de la lista", pos);
+    }else{
+        printf("el nombre ingresado no se encuentra en la lista");
+    }
+
+
 }
