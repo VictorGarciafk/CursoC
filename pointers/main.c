@@ -7,21 +7,38 @@ struct producto
     float precio;
 };
 
+struct pais
+{
+    char nombre[31];
+    int habitantes;
+};
+
+
 
 void introduccionPointers();
 void ejercicio1();
 int Suma();
 void productos();
+void paises();
+void nombre();
+void medirLargoPalabra();
+
 int asignarValor(int* asignValor);
 int crearProductos(struct producto* p);
-
+int registrarPais(struct pais* ps);
+int imprimirPais(struct pais pa);
+int cargarNombre(char* name);
+int largo(char* cadena);
 
 int main(){
 
     //introduccionPointers();
     //ejercicio1();
     //Suma();
-    productos();
+    //productos();
+    //paises();
+    //nombre(); 
+    medirLargoPalabra();
 
     return 0;
 }
@@ -101,6 +118,48 @@ void productos(){
 
 }
 
+//cuarto ejercicio
+void paises(){
+    struct pais p[3];
+    int i;
+
+    for (i = 0; i < 3; i++)
+    {
+        registrarPais(&p[i]);
+        printf("*-*-*-*-*-*-*-*-*-*-*-*-*-*\n");
+    }
+    
+    for (i = 0; i < 3; i++)
+    {
+        imprimirPais(p[i]);
+        printf("*-*-*-*-*-*-*-*-*-*-*-*-*-*\n");
+    }
+    
+    
+}
+
+//quinto ejercicio
+void nombre(){
+    char nombre[41];
+
+    //al cargar un vector en una funcion como puntero no ocupa pasarse la direccion de memoria, ya que los vectores
+    //se les considera como punteros, por lo cual no requiere ninguna conversion
+    cargarNombre(nombre);
+}
+
+//sexto ejercicio
+void medirLargoPalabra(){
+    char palabra[7] = {'p','a','t','a','t','a'};
+    int ipalabra;
+
+    //usar esta funcion es igual que usar la funcion strlen, aqui hacemos la funcion para ver su funcionamiento
+    ipalabra = largo(palabra);
+
+    printf("la cantidad de letras en la palabra %s son: %i", palabra, ipalabra);
+}
+
+
+
 //esta funcion se utiliza para asignar valor a las variables puntero a entero, pasamos como parametro un puntero con la
 //direccion de memoria asignada
 int asignarValor(int* asignValor){
@@ -130,4 +189,48 @@ int crearProductos(struct producto* p){
 
     printf("ingrese el precio del producto: ");
     scanf("%f", &p->precio);
+}
+
+int registrarPais(struct pais* ps){
+    
+    printf("ingrese el nombre del pais: ");
+    scanf(" %[^\n]", ps->nombre);
+
+    printf("ingrese la cantidad de habitante del pais: ");
+    scanf("%i", &ps->habitantes);
+
+    return 0;
+}
+
+int imprimirPais(struct pais pa){
+
+    printf("Pais: %s\n", pa.nombre);
+    printf("habitantes: %i\n", pa.habitantes);
+
+    return 0;
+}
+
+int cargarNombre(char* name){
+    
+    printf("ingrese el nombre:");
+    scanf(" %[^\n]", name);
+
+    return 0;
+}
+
+int largo(char* cadena){
+    int l = 0;
+
+    while (*cadena != '\0')
+    {
+        //cuando se utiliza el ++ en un pointer pasamos a la siguiente posicion del pointer
+        //por ejemplo, el pointer que contiene un vector de caracteres con la palabra PATATA
+        //comienza con la posicion 1 que es 'P', al darle ++ su siguiente posicion es 'A' y asi sucesivamente hasta llegar
+        //al campo vacio '\0' que es cuando saldra el programa del while
+        cadena++;
+        //a diferencia del ++ del pointer este si aumenta la cantidad del entero de 1 en 1
+        l++;
+    }
+    
+    return l;
 }
