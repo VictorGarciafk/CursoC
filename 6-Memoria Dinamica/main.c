@@ -16,6 +16,9 @@ struct nodo {
 //El nodo raiz sera donde almacenaremos de forma secuencial la lista con los nodos que se vayan agregando
 struct nodo *raiz = NULL;
 
+//El nodo final facilitara el acceso al ultimo valor en la lista
+struct nodo *final = NULL;
+
 void vectorSize();
 void listaProductos();
 void newProducto(struct producto* pr);
@@ -23,7 +26,12 @@ void newProducto(struct producto* pr);
 void stackList();
 void insertarStack(int x);
 int extraerStack();
-void imprimirStack();
+
+void queueList();
+void insertarQueue(int x);
+int extraerQueue();
+
+void imprimirLista();
 void freeListMemory();
 int cantidadNodos();
 
@@ -32,7 +40,9 @@ int main(){
     //vectorSize();
     //listaProductos();
 
-    stackList();
+    //stackList();
+    queueList();
+
     return 0;
 }
 
@@ -104,6 +114,8 @@ void newProducto(struct producto* pr){
     scanf("%.2f", &pr->precio);
 }
 
+
+
 //*-*-*-*-*-Linked list-*-*-*-*-*
 //las linked list es una secuencia de nodos que se compone con un dato y un pointer
 //a diferencia de los arrays que cada elemento es contiguo(cercano, proximo) en el espacio de memoria,
@@ -126,7 +138,7 @@ void stackList(){
     }
     bExtraer = 0;
 
-    imprimirStack();
+    imprimirLista();
     printf("la cantidad de nodos que tiene la lista son: %i\n", cantidadNodos());
     
     do
@@ -150,13 +162,13 @@ void stackList(){
     }
     printf("\n");
     
-    imprimirStack();
+    imprimirLista();
     printf("la cantidad de nodos que tiene la lista son: %i", cantidadNodos());
 
     freeListMemory();
 }
 
-//inserta en nuestra lista un nuevo nodo de forma secuencial
+//inserta en nuestra lista un nuevo nodo de forma secuencial, recorriendo el primer valor ingresado hasta el final de la lista
 void insertarStack(int x){
     struct nodo *nuevo;
     nuevo = malloc(sizeof(struct nodo));
@@ -177,7 +189,7 @@ void insertarStack(int x){
 //extraemos el primer nodo de nuestra lista, retornando el valor y eliminamos de la lista el primer nodo
 int extraerStack(){
 
-    //verificamos que nuestro stack tenga almenos un nodo
+    //verificamos que la tenga almenos un valor
     if (raiz != NULL)
     {
         int inf = raiz->info;
@@ -196,8 +208,78 @@ int extraerStack(){
     }
 }
 
+
+//*-*-*-*-*-Queue-*-*-*-*-*
+//FIFO(First in - First Out)
+
+void queueList(){
+
+    insertarQueue(5);
+    insertarQueue(10);
+    insertarQueue(15);
+    insertarQueue(20);
+
+    imprimirLista();
+
+    printf("El valor extraido de la cola es: %i\n", extraerQueue());
+    
+    imprimirLista();
+
+    freeListMemory();
+}
+
+//inserta en nuestra lista un nuevo nodo de forma secuencial, recorriendo el ultimo valor ingresado hasta el final de la lista
+void insertarQueue(int x){
+    struct nodo *nuevo;
+    nuevo = malloc(sizeof(struct nodo));
+    nuevo->info = x;
+    nuevo->sig = NULL;
+
+    //si la lista esta vacia asignamos el nuevo valor en raiz y como el final de la lista
+    if (raiz == NULL){
+        raiz = nuevo;
+        final = nuevo;
+    }else{
+        //insertamos el puntero del ultimo valor en sig.
+        final->sig = nuevo;
+        //hacemos del nuevo valor ingresado como nuestro ultimo nodo
+        final = nuevo;
+    }
+}
+
+int extraerQueue(){
+    //verificamos que la lista tenga almenos un nodo
+    if (raiz != NULL)
+    {
+        int inf = raiz->info;
+
+        //almacenamos la direccion de memoria del nodo a eliminar
+        struct nodo *elim = raiz;
+        
+        //si la ubicacion de memoria de raiz y final son la misma asignamos el valor NULL a ambas
+        if (raiz == final)
+        {
+            raiz = NULL;
+            final == NULL;
+        }else{
+            //remplazamos el nodo raiz por el siguiente nodo
+            raiz = raiz->sig;
+        }
+        
+        free(elim);
+
+        return inf;
+    }else{
+        //retornamos el valor -1 en caso que la lista este vacia
+        return -1;
+    }
+}
+
+
+//*-*-*-*-*-Funciones para Stack y Queue-*-*-*-*-*
+
 //lee e imprime la lista de todos los elementos almacenados en la lista.
-void imprimirStack(){
+void imprimirLista(){
     struct nodo *imp=raiz;
     printf("Lista completa.\n");
     while (imp != NULL)
@@ -233,5 +315,3 @@ int cantidadNodos(){
 
     return iCount;
 }
-
-//*-*-*-*-*-Queue-*-*-*-*-*
