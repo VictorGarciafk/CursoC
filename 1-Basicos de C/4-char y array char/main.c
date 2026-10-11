@@ -9,12 +9,21 @@ void vocalesMinusculas();
 
 int main(){
 
-    //abecedario();
-    //suma();
+    int choice;
+    void(*caracteres[5])() = { abecedario, suma, helloWorld, edadMasAlta, vocalesMinusculas };
+    
+    printf("Seleccione uno de los siguientes ejercicios de caracteres:\n");
+    printf("1.Abecedario\n2.Sumas\n3.Hello World\n4.Edad mas alta\n5.Vocales Minusculas\n");
+    scanf("%d", &choice);
+    choice--;
 
-    //helloWorld();
-    //edadMasAlta();
-    vocalesMinusculas();
+    if (choice >=0 && choice <= 4)
+    {
+        caracteres[choice]();
+    }else{
+        printf("opcion no encontrada");
+    }
+    
 
     return 0;
 }

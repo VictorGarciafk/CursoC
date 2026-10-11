@@ -37,12 +37,19 @@ int cantidadNodos();
 
 int main(){
 
-    //vectorSize();
-    //listaProductos();
-
-    //stackList();
-    queueList();
-
+    int choice;
+    void(*mDinamica[4])() = { vectorSize, listaProductos, stackList, queueList };
+    
+    printf("Seleccione uno de los siguientes ejercicios de memoria dinamica:\n");
+    printf("1.VectorSize\n2.Lista de productos\n3.StackList\n4.QueueList\n");
+    scanf("%d", &choice);
+    choice--;
+    
+    if(choice>=0 && choice <= 3){
+        mDinamica[choice]();
+    }else{
+        printf("opcion no encontrada");
+    }
     return 0;
 }
 

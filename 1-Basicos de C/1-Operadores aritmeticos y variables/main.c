@@ -11,13 +11,19 @@ void compraArticulo();
 //nuestra funcion principal donde se ejecutara todo el programa
 int main(){
 
-    //suma();
-    //areaCuadradado();
-    //perimetroCuadrado();
-    //promedio();
-    //calcularSueldo();
-    compraArticulo();
+    int choice;
+    void(*oAritmeticas[6])() = { suma, areaCuadradado, perimetroCuadrado, promedio, calcularSueldo, compraArticulo};
+    printf("Seleccione uno de los siguientes ejercicios de operaciones aritmeticas:\n");
+    printf("1.Sumas\n2.Area de un cuadradado\n3.Perimetro de un cuadrado\n4.Promedio\n5.Calcular sueldo\n6.Comprar articulo\n");
+    scanf("%d", &choice);
+    choice--;
 
+    if(choice>=0 && choice<=5){
+        oAritmeticas[choice]();
+    }else{
+        printf("opcion no encontrada");
+    }
+        
     return 0;
 }
 

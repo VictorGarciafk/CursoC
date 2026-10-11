@@ -2,7 +2,7 @@
 #include<string.h>
 
 void primerEjercicio();
-void mayorque(int v1, int v2);
+void mayorQue(int v1, int v2);
 void segundoEjercicio();
 void hombreOMujer(char g);
 void tercerEjercicio();
@@ -14,11 +14,20 @@ int areaRectangulo(int lado1, int lado2);
 
 int main(){
 
-    //primerEjercicio();
-    //segundoEjercicio();
-    //tercerEjercicio();
-    //cuartoEjercicio();
-    quintoEjercicio();
+    int choice;
+    void(*ejercicios[5])() = { primerEjercicio, segundoEjercicio, tercerEjercicio, cuartoEjercicio, quintoEjercicio };
+
+    printf("Seleccione uno de los siguientes ejercicios de funciones:\n");
+    printf("1.Valor mas alto entre dos numeros\n2.Genero\n3.valor mas alto entre 3 numeros\n4.Area de un cuadrado\n5.Area de un rectangulo\n");
+    scanf("%d", &choice);
+    choice--;
+
+    if (choice >= 0 && choice < 5)
+    {
+        ejercicios[choice]();
+    }else{
+        printf("opcion no encontrada");
+    }
 
     return 0;
 }
@@ -36,12 +45,12 @@ void primerEjercicio(){
     scanf("%i", &valor2);
 
     //pasamos como parametro los dos valores obtenidos para que pueda hacer la comparacion de cual de los dos es mayor
-    mayorque(valor1, valor2);
+    mayorQue(valor1, valor2);
 }
 
 //ingresamos el valor v1 y v2 en base a los valores puesto en la main
 //no usamos punteros ya que no vamos a sobrescribir ninguna de la informacion de los enteros entrante
-void mayorque(int v1, int v2){
+void mayorQue(int v1, int v2){
 
     if (v1 > v2)
     {

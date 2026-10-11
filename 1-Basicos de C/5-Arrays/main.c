@@ -2,7 +2,7 @@
 #include<string.h>
 
 void sueldo();
-void EstaturaPromedio();
+void estaturaPromedio();
 void enterosYDecimales();
 void cargarDiagonal();
 void artVenta();
@@ -12,16 +12,22 @@ void ordenarCalificaciones();
 
 int main(){
 
-    //sueldo();
-    //EstaturaPromedio();
+    int choice;
+    void(*arreglos[8])() = { sueldo, estaturaPromedio, enterosYDecimales, cargarDiagonal, artVenta, cargaYBusqueda,
+    nombresYEdades, ordenarCalificaciones };
+    
+    printf("Seleccione uno de los siguientes ejercicios de arreglos:\n");
+    printf("1.Sueldo\n2.Estatura promedio\n3.Enteros y decimales\n4.Cargar diagonal\n5.Articulos en venta\n6.Carga y busqueda\n7.Nombres y edades\n8.ordenar calificaciones\n");
+    scanf("%d", &choice);
+    choice--;
 
-    //enterosYDecimales();
-    //cargarDiagonal();
-    //artVenta();
-    //cargaYBusqueda();
-
-    //nombresYEdades();
-    ordenarCalificaciones();
+    if (choice >=0 && choice < 8)
+    {
+        arreglos[choice]();
+    }else{
+        printf("opcion no encontrada");
+    }
+    
 
     return 0;
 }
@@ -49,7 +55,7 @@ void sueldo(){
 }
 
 //lee 5 estaturas(valores) y calcula cuantos son mas bajos y mas altos que el promedio
-void EstaturaPromedio(){
+void estaturaPromedio(){
     float estaturas[5];
     float promedio, suma;
     int i, pAltas, pBajas;

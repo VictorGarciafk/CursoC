@@ -1,22 +1,33 @@
 #include<stdio.h>
 #include<string.h>
 
-int contarletras();
+int contarCaracteres();
 int compararCaracteres();
 int copiarNombre();
 int CombinarNombreApellido();
 
 int main(){
-    //contarletras();
-    //compararCaracteres();
-    //copiarNombre();
-    //CombinarNombreApellido();
+
+    int choice;
+    int (*funcionesStrings[4])() = { contarCaracteres, compararCaracteres, copiarNombre, CombinarNombreApellido };
+
+    printf("Seleccione uno de los siguientes ejercicios de funciones de strings.h\n");
+    printf("1.Contar letras\n2.Comparar caracteres\n3.Copiar nombre\n4.Combinar nombre y apellido\n");
+    scanf("%d", &choice);
+    choice--;
+
+    if (choice >=0 && choice <4)
+    {
+        funcionesStrings[choice]();
+    }else{
+        printf("opcion no encontrada");
+    }    
 
     return 0;
 }
 
 //usamos la funcion strlen para contar la cantidad de caracteres que hay en la cacena de caracteres que ingresamos por teclado
-int contarletras(){
+int contarCaracteres(){
     char palabra[31];
     int cantpalabra;
     printf("ingrese una palabra: ");

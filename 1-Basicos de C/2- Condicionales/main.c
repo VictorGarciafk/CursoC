@@ -12,17 +12,19 @@ void navidadFecha();
 
 int main(){
 
-    //digitos();
-    //impuestos();
-    //alumnoBecado();
+    int choice;
+    void(*condicionales[9])() = { digitos, impuestos, alumnoBecado, numeroMasAlto, tipoNum, calificacion, numMenorDiez, primerTrimestre, navidadFecha };
 
-    //numeroMasAlto();
-    //tipoNum();
-    //calificacion();
+    printf("Seleccione uno de los siguientes ejercicios de condicionales:\n");
+    printf("1.Digitos\n2.Impuestos\n3.Alumno becado\n4.Numero mas alto\n5.Tipo de numero\n6.Calificacion\n7.Numero menor a diez\n8.Primer trimestre\n9.Navidad fecha\n");
+    scanf("%d", &choice);
+    choice--;
 
-    //numMenorDiez();
-    //primerTrimestre();
-    navidadFecha();
+    if(choice>=0 && choice<=8){
+        condicionales[choice]();
+    }else{
+        printf("opcion no encontrada");
+    }
 
     return 0;
 }

@@ -7,11 +7,20 @@ void promedio();
 
 int main(){
 
-    //multiplos();
-    //triangulos();
-    //cuentaCien();
-    promedio();
+    int choice;
+    void(*ciclos[4])() = { multiplos, triangulos, cuentaCien, promedio };
 
+    printf("Seleccione uno de los siguientes ejercicios de ciclos:\n");
+    printf("1.Multiplos\n2.Triangulos\n3.Cuenta a cien\n4.Promedio\n");
+    scanf("%d", &choice);
+    choice--;
+    
+    if (choice >=0 && choice <= 3)
+    {
+        ciclos[choice]();
+    }else{
+        printf("opcion no encontrada");
+    }
     return 0;
 }
 
@@ -93,9 +102,11 @@ void promedio(){
     int contador, suma, promedio, valor;
 
     suma = contador = 0;
+    printf("ingrese 0 cuando quiera parar de sumar\n");
 
     //un do while asegura que el ciclo while va a ingresar almenos una vez aunque la condicion no se cumpla al inicio
     do{
+        
         printf("ingrese el valor a sumar: ");
         scanf("%i", &valor);
 

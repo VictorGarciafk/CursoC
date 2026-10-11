@@ -13,11 +13,9 @@ struct pais
     int habitantes;
 };
 
-
-
 void introduccionPointers();
 void ejercicio1();
-int Suma();
+void Suma();
 void productos();
 void paises();
 void nombre();
@@ -32,13 +30,21 @@ int largo(char* cadena);
 
 int main(){
 
-    //introduccionPointers();
-    //ejercicio1();
-    //Suma();
-    //productos();
-    //paises();
-    //nombre(); 
-    medirLargoPalabra();
+    int choice;
+    void(*funciones[7])() = { introduccionPointers, ejercicio1, Suma, productos, paises, nombre, medirLargoPalabra };
+    
+    printf("Seleccione una de las siguientes funciones: \n");
+    printf("1.Introduccion a pointers\n2.Ejercicio 1\n3.Sumas\n4.Producto\n5.Paises\n6.Nombre\n7.Medir caracteres\n");
+    scanf("%d", &choice);
+    choice--;
+
+    if (choice >= 0 && choice < 7)
+    {
+        funciones[choice]();
+    }else{
+        printf("opcion incorrecta");
+    }
+    
 
     return 0;
 }
@@ -82,15 +88,13 @@ void ejercicio1(){
 
 //Seguno ejercicio
 //creamos dos variables enteras sin inicalizar y asignar un valor a travez de una funcion y sumarlos
-int Suma(){
+void Suma(){
     int inum1, inum2;
 
     asignarValor(&inum1);
     asignarValor(&inum2);
 
     printf("la suma de los dos valores es %i", (inum1 + inum2));
-
-    return 0;
 }
 
 //tercer ejercicio
